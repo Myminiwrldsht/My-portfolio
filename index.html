@@ -1,90 +1,150 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maya's Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maya | Developer Portfolio</title>
   <style>
-    * {
-      margin: 0; padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --primary: #6a11cb;
+      --background: #ffffff;
+      --text: #333;
     }
+    body.dark-mode {
+      --background: #1e1e1e;
+      --text: #f1f1f1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     body {
-      background: #f7f8fc;
-      color: #333;
-      padding: 2rem;
-      line-height: 1.6;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      padding: 1rem;
+      max-width: 800px;
+      margin: auto;
     }
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      padding-top: 2rem;
+      animation: fadeIn 1s ease-in;
     }
-    h1 {
-      font-size: 2.5rem;
-      color: #6a11cb;
+    h1 { font-size: 2.5rem; color: var(--primary); }
+    p { margin: 1rem 0; line-height: 1.6; }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-    p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0.5rem auto;
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
-    section {
-      margin-top: 3rem;
+
+    .section {
+      margin-top: 2rem;
+      animation: slideIn 0.7s ease-in-out;
     }
     .project {
-      background: #fff;
-      padding: 1.5rem;
-      margin: 1rem 0;
-      border-left: 4px solid #6a11cb;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      background: rgba(106, 17, 203, 0.05);
+      padding: 1rem;
+      border-left: 4px solid var(--primary);
+      margin-bottom: 1rem;
     }
     footer {
-      text-align: center;
-      margin-top: 4rem;
+      margin-top: 3rem;
       font-size: 0.9rem;
-      color: #999;
+      text-align: center;
+      color: var(--text);
     }
-    a {
-      color: #6a11cb;
-      text-decoration: none;
+    a { color: var(--primary); text-decoration: none; }
+
+    .top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
     }
-    a:hover {
-      text-decoration: underline;
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .menu-toggle { display: block; }
     }
   </style>
 </head>
 <body>
+  <nav>
+    <div id="greeting"></div>
+    <div class="menu-toggle" onclick="toggleDarkMode()">🌗</div>
+  </nav>
 
   <header>
     <h1>Hey, I'm Maya 👋</h1>
-    <p>A passionate developer in training — building beautiful, powerful, and thoughtful digital things.</p>
+    <p>I build beautiful, meaningful websites and mobile apps — and I’m learning every day.</p>
   </header>
 
-  <section>
+  <div class="section">
     <h2>💼 Projects</h2>
-
     <div class="project">
       <h3>🌐 Portfolio Website</h3>
-      <p>This website you're looking at! It's my space on the internet where I share what I build as I grow.</p>
+      <p>This responsive website (what you’re viewing now!) is built with HTML, CSS, and JavaScript — and hosted with GitHub Pages.</p>
     </div>
-
     <div class="project">
       <h3>📋 To-Do List App</h3>
-      <p>A responsive task app built with JavaScript that lets you manage your day efficiently.</p>
+      <p>A clean, responsive JavaScript-based task manager. Coming soon!</p>
     </div>
-
     <div class="project">
       <h3>☀️ Weather App</h3>
-      <p>Uses an API to display real-time weather info based on your location or search.</p>
+      <p>Real-time weather from an open API, styled with CSS transitions and icons.</p>
     </div>
-  </section>
+  </div>
 
   <footer>
-    Built with ❤️ by Maya · <a href="https://github.com/Myminiwrldsht" target="_blank">GitHub</a>
+    Made with 💜 by Maya · <a href="https://github.com/Myminiwrldsht" target="_blank">GitHub</a>
   </footer>
 
+  <button class="top-btn" id="topBtn" onclick="scrollToTop()">⬆️ Top</button>
+
+  <script>
+    // Greeting
+    const greeting = document.getElementById('greeting');
+    const hour = new Date().getHours();
+    if (hour < 12) greeting.innerText = '🌞 Good morning';
+    else if (hour < 18) greeting.innerText = '🌤️ Good afternoon';
+    else greeting.innerText = '🌙 Good evening';
+
+    // Back to top
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = () => {
+      topBtn.style.display = window.scrollY > 200 ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Dark mode
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
 </body>
 </html>
