@@ -133,6 +133,22 @@
                 display: block;
             }
         }
+        form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button[type='submit'] {
+  background: var(--primary);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
     </style>
 </head>
 
@@ -191,7 +207,18 @@
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
         }
+
     </script>
+    <section style="margin-top: 2rem;">
+        <h2>📬 Contact Me</h2>
+        <form action="https://formspree.io/f/xrbknezp" method="POST">
+            <input type="text" name="name" placeholder="Your name" required><br><br>
+            <input type="email" name="email" placeholder="Your email" required><br><br>
+            <textarea name="message" placeholder="Say something..." required></textarea><br><br>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+      
 </body>
 
 </html>
